@@ -1,0 +1,89 @@
+-Root access to postgres (Using default user postgres)
+    ***sudo -u postgres psql postgres***
+
+-Connects to a database under a specific user
+    ***psql -h [HOST] -U [USER] -d [DATABASE]-W***
+
+- Exit Postgres(PSQL) session
+    ***\q ***
+
+- List roles
+    ***SELECT * FROM pg_roles;***
+
+-Select database
+    ***\c [DATABASE]***
+    - Example
+    ***\c market_force***
+
+-List collections(databases)
+    ***\l ***
+
+-List all schemas in database
+    ***\d ***
+
+-List all tables in database
+    ***\dt ***
+
+-List all views in database
+    ***\dv ***
+
+-Describe relation(table)
+    ***\d+ [TABLENAME]***
+    
+- Create a new database
+    ***CREATE DATABASE [DATABASENAME]***
+    - Example
+    ***CREATE DATABASE app***
+
+- Sample pg_dump withouth changing access type from peer to md5
+    ***pg_dump -h [HOST] -U [USER] -d [DATABASE] > [FILENAME]***
+    - Example
+    ***pg_dump -h 127.0.0.1 -U app -d market_force > Downloads/marketforce.sql***
+
+- Restore pg_dump using psql command
+    ***psql -h [HOST] -U [USER] -d [DATABASE] < [FILENAME]***
+    - Example
+    ***psql -h 127.0.0.1 -U app -d market_force < Downloads/marketforce.sql***
+
+- Restore pg_dump (.backup) using psql command
+    ***pg_restore -h [HOST] -U [USER] -d [DATABASE] < [FILENAME]***
+    - Example
+    ***pg_restore -h 127.0.0.1 -U app -d market_force < Downloads/marketforce.backup***
+
+- Create user with superuser permissions and a login
+    ***CREATE USER [USERNAME] WITH SUPERUSER LOGIN PASSWORD [PASSWORD]***
+    - Example
+    ***CREATE USER app WITH SUPERUSER LOGIN PASSWORD 'app'***
+
+- Assign role to database wilt all privillages
+    ***GRANT ALL PRIVILEGES ON DATABASE [DATABASE] TO [USER]***
+    - Example
+    ***GRANT ALL PRIVILEGES ON DATABASE market_force TO app***
+
+- COPY data from file (csv)
+    ***COPY [TABLE][FIELDS] FROM ['/path/to/file'] [DELIMITER] [FORMAT][HEADER_OPTION]***
+    -Example
+    ***COPY projects_project(id, company, created_at, email, has_suppliers, logo, no_of_users, phone_number, physical_address, postal_address, tax_pin, updated_at, website) FROM '/home/mesongo/Downloads/MarketForceData/projects.csv' DELIMITER ',' CSV***
+
+- Dump data to file
+    ***COPY [TABLE][FIELDS] TO ['/path/to/file'] [DELIMITER] [FORMAT][HEADER_OPTION]***
+    - Example
+    ***COPY customers_customer TO '/home/mesongo/Downloads/customers.csv' DELIMITER ',' CSV HEADER***
+
+- Example for loop to insert rows to table
+    ***DO
+    $do$
+    DECLARE
+        variant_id uuid;
+    BEGIN
+
+    FOR variant_id IN SELECT DISTINCT id FROM inventory_productvariant WHERE project_id='d0dc9ec0-afff-445b-81ca-1cc57c15ccac' LOOP
+        INSERT INTO inventory_productvarianttax (id, created_at, updated_at, active, deleted, created_by_id, project_id, tax_id, variant_id) VALUES
+        (uuid_generate_v4(), TIMESTAMP WITH TIME ZONE '2016-11-21 15:11:02.109376+00', TIMESTAMP WITH TIME ZONE '2016-11-21 15:11:02.109376+00', true, false, '2d1e8600-1dd9-46b6-90c1-1a14e3361297', 'd0dc9ec0-afff-445b-81ca-1cc57c15ccac', '41ca5082-027c-4575-be2a-6ceddd0a09b5', variant_id);
+    END LOOP;
+    END
+    $do$***
+
+- Insert Random numbers
+    - Example
+    ***UPDATE customers_customer SET phone = FLOOR(RANDOM() * 30000079) + 1 WHERE phone IS NULL;***

@@ -1,0 +1,136 @@
+# Local Database Settings
+api/config/local.py
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pycache__
+/__pycache__/
+
+*.pyc
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+mm/
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+coverage
+junitxml_report
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+documentation/build/
+
+# PyBuilder
+target/
+
+# IDEs
+.idea/
+*/db.sqlite3
+
+
+# clonedigger
+clonedigger.html
+
+# Ignore files that contain secrets that should not be on git
+.pypirc
+
+.tox/*
+
+# Don't track uploads in git
+*media*
+uploads/
+
+# env files store config stuff
+.env
+env.sh
+
+# IPython notebooks, used to experiment on stuff
+*.ipynb
+
+# Temp file
+.fab_tasks~
+static/*
+data/data/approvals/*
+data/data/demo/*
+data/data/facilities/*
+data/data/geocodes/*
+data/data/last/*
+data/data/setup/*
+emrapp/urls.txt
+*.sql
+# mac
+.DS_Store
+.DS_Store
+run_tests.sh
+
+# Node modules, from front-end submodule
+node_modules/
+EGG-INFO/*
+
+# Profiler output
+profile
+
+#celery
+celerybeat-schedule
+celerybeat.pid
+dump.rdb
+
+#ignore backup files
+*~
+\#*#
+
+# ignore junitxml_report contents
+junitxml_report/
+
+# vim
+*.swp
+
+#ctags
+.tags*
+
+# profiling output
+prof/
+
+data/
+metastore_db/
+
